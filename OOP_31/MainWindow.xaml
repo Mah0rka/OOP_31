@@ -1,0 +1,48 @@
+﻿<Window x:Class="OOP_31.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Диспетчер процесів" Height="597" Width="1008" Background="#FF252525">
+    <Grid Margin="0,0,0,-6">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="91*"/>
+            <ColumnDefinition Width="54*"/>
+            <ColumnDefinition Width="156*"/>
+            <ColumnDefinition Width="296*"/>
+            <ColumnDefinition Width="49*"/>
+            <ColumnDefinition Width="45*"/>
+            <ColumnDefinition Width="149*"/>
+            <ColumnDefinition Width="155*"/>
+            <ColumnDefinition Width="13*"/>
+        </Grid.ColumnDefinitions>
+        <ListView Name="ProcessList" Margin="10,10,43,10" MouseRightButtonUp="ProcessList_RightClick"
+                  ItemsSource="{Binding}" Grid.ColumnSpan="7" Background="White">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Ім'я" DisplayMemberBinding="{Binding ProcessName}" Width="300">
+                        <GridViewColumn.HeaderContainerStyle>
+                            <Style TargetType="GridViewColumnHeader">
+                                <EventSetter Event="Click" Handler="GridViewColumnHeader_Click"/>
+                            </Style>
+                        </GridViewColumn.HeaderContainerStyle>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Ідентифікатор процесу" DisplayMemberBinding="{Binding Id}" Width="200">
+                        <GridViewColumn.HeaderContainerStyle>
+                            <Style TargetType="GridViewColumnHeader">
+                                <EventSetter Event="Click" Handler="GridViewColumnHeader_Click"/>
+                            </Style>
+                        </GridViewColumn.HeaderContainerStyle>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Показати деталі" Click="ShowDetails_Click"/>
+                    <MenuItem Header="Показати потоки та модулі" Click="ShowThreadsAndModules_Click"/>
+                    <MenuItem Header="Завершити процес" Click="KillProcess_Click"/>
+                </ContextMenu>
+            </ListView.ContextMenu>
+        </ListView>
+        <Button Content="Оновити" HorizontalAlignment="Left" Margin="134,0,0,504" VerticalAlignment="Bottom" Click="RefreshButton_Click" Width="160" Height="39" Grid.ColumnSpan="2" Background="#FF333131" Foreground="White" Grid.Column="6"/>
+        <Button Content="Експорт у файл" HorizontalAlignment="Right" Margin="0,0,10,429" VerticalAlignment="Bottom" Click="ExportButton_Click" Width="160" Height="43" Grid.Column="6" Background="#FF333131" Foreground="White" Grid.ColumnSpan="2"/>
+    </Grid>
+</Window>
